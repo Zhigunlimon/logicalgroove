@@ -15,21 +15,21 @@ describe ConfigSetting do
   it "setting value sets value_class" do
     value = 123
 
-    setting = ConfigSetting.new(:value => value)
+    setting = ConfigSetting.new(value: value)
     assert_equal(setting.value_class, value.class.to_s)
   end
 
   it "updating value updates value_class" do
     new_val = "abc"
-    setting = ConfigSetting.new(:value => 10.0)
+    setting = ConfigSetting.new(value: 10.0)
     setting.value = new_val
     assert_equal(setting.value_class, new_val.class.to_s)
   end
 
   it "keys must be unique" do
     key = "duplicate"
-    setting1 = ConfigSetting.create(:key => key, :value => 123)
-    setting2 = ConfigSetting.new(:key => key, :value => 456)
+    setting1 = ConfigSetting.create(key: key, value: 123)
+    setting2 = ConfigSetting.new(key: key, value: 456)
     assert !setting2.valid?
     assert setting2.invalid?(:key)
   end
@@ -59,12 +59,10 @@ describe ConfigSetting do
   end
 
   def assert_value_properly_returned(value)
-    setting = ConfigSetting.create(:key => value.class.to_s, :value => value)
+    setting = ConfigSetting.create(key: value.class.to_s, value: value)
     unless setting.nil?
       assert_equal(setting.value, value)
       assert_equal(setting.value.class, value.class)
     end
   end
 end
-
-#

@@ -4,8 +4,6 @@ class ConfigSetting < ActiveRecord::Base
   validate :value_class_attribute_matches_value
   after_save :save_to_cash
 
-  attr_accessor :return_val
-
   class << self
     def from_cache(cache_key)
       Rails.cache.fetch cache_key
